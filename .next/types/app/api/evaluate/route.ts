@@ -1,4 +1,4 @@
-// File: /Users/iwakitoshiyuki/claude-code-book-chapter8/src/app/api/evaluate/route.ts
+// File: /Users/iwakitoshiyuki/QuestionCoach/src/app/api/evaluate/route.ts
 import * as entry from '../../../../../src/app/api/evaluate/route.js'
 import type { NextRequest } from 'next/server.js'
 

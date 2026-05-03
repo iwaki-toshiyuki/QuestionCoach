@@ -6,18 +6,11 @@ interface ScoreDisplayProps {
   scores: EvaluationResult['scores'];
 }
 
-function scoreColor(score: number): string {
-  if (score >= 90) return 'text-green-600 bg-green-50 border-green-200';
-  if (score >= 75) return 'text-blue-600 bg-blue-50 border-blue-200';
-  if (score >= 50) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-  return 'text-red-600 bg-red-50 border-red-200';
-}
-
-function scoreBarColor(score: number): string {
-  if (score >= 90) return 'bg-green-500';
-  if (score >= 75) return 'bg-blue-500';
-  if (score >= 50) return 'bg-yellow-500';
-  return 'bg-red-500';
+function scoreTheme(score: number) {
+  if (score >= 90) return { text: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200', bar: 'bg-green-500' };
+  if (score >= 75) return { text: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-200', bar: 'bg-indigo-500' };
+  if (score >= 50) return { text: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200', bar: 'bg-amber-500' };
+  return { text: 'text-red-600', bg: 'bg-red-50', border: 'border-red-200', bar: 'bg-red-500' };
 }
 
 const DIMENSION_LABELS: Record<string, string> = {
@@ -29,32 +22,47 @@ const DIMENSION_LABELS: Record<string, string> = {
 
 export function ScoreDisplay({ scores }: ScoreDisplayProps) {
   const dimensions = ['specificity', 'context', 'clarity', 'answerability'] as const;
+  const totalTheme = scoreTheme(scores.total);
 
   return (
     <div className="space-y-4">
       {/* 総合スコア */}
-      <div className={`rounded-xl border p-4 ${scoreColor(scores.total)}`}>
-        <div className="flex items-center justify-between">
-          <span className="text-lg font-bold">総合スコア</span>
-          <span className="text-3xl font-bold">{scores.total} / 100</span>
+      <div className={`rounded-xl border p-6 ${totalTheme.bg} ${totalTheme.border}`}>
+        <p className="text-sm font-medium text-slate-500 mb-1">総合スコア</p>
+        <div className="flex items-end gap-2">
+          <span className={`text-6xl font-bold leading-none ${totalTheme.text}`}>{scores.total}</span>
+          <span className="text-xl text-slate-400 mb-1">/ 100</span>
         </div>
-        <div className="mt-2 h-3 w-full rounded-full bg-white/50">
+        <div className="mt-3 h-2 w-full rounded-full bg-white/70">
           <div
-            className={`h-3 rounded-full transition-all ${scoreBarColor(scores.total)}`}
+            className={`h-2 rounded-full transition-all ${totalTheme.bar}`}
             style={{ width: `${scores.total}%` }}
           />
         </div>
       </div>
 
       {/* 4観点スコア */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3">
         {dimensions.map((key) => {
           const dim = scores[key];
+          const theme = scoreTheme(dim.score);
+          const isLow = dim.score < 50;
           return (
-            <div key={key} className={`rounded-lg border p-3 ${scoreColor(dim.score)}`}>
-              <div className="text-xs font-medium">{DIMENSION_LABELS[key]}</div>
-              <div className="mt-1 text-2xl font-bold">{dim.score}</div>
-              <div className="mt-1 text-xs opacity-80">{dim.reason}</div>
+            <div
+              key={key}
+              className={`rounded-lg border p-4 bg-white ${isLow ? 'border-l-4 border-l-red-400 border-t border-r border-b border-slate-200' : 'border-slate-200'}`}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-medium text-slate-500">{DIMENSION_LABELS[key]}</span>
+                <span className={`text-lg font-bold ${theme.text}`}>{dim.score}</span>
+              </div>
+              <div className="h-1.5 w-full rounded-full bg-slate-100">
+                <div
+                  className={`h-1.5 rounded-full ${theme.bar}`}
+                  style={{ width: `${dim.score}%` }}
+                />
+              </div>
+              <p className="mt-2 text-xs text-slate-500 leading-relaxed">{dim.reason}</p>
             </div>
           );
         })}

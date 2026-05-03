@@ -19,21 +19,19 @@ export function FeedbackSection({ scores, overallFeedback }: FeedbackSectionProp
   const improvementItems = dimensions.filter((key) => scores[key].feedback);
 
   return (
-    <div className="space-y-3 rounded-xl border border-gray-200 bg-gray-50 p-4">
-      <h3 className="font-semibold text-gray-800">改善フィードバック</h3>
+    <div className="space-y-3 rounded-xl border border-slate-200 bg-white p-5">
+      <h3 className="font-semibold text-slate-800">改善フィードバック</h3>
 
-      {/* 総合サマリー */}
-      <p className="text-sm text-gray-700">{overallFeedback}</p>
+      <p className="text-sm text-slate-600">{overallFeedback}</p>
 
-      {/* 観点別フィードバック */}
       {improvementItems.length > 0 ? (
         <ul className="space-y-2">
           {improvementItems.map((key) => (
             <li key={key} className="flex gap-2 text-sm">
-              <span className="mt-0.5 text-yellow-500">⚠</span>
+              <span className="mt-0.5 text-amber-500">⚠</span>
               <span>
-                <span className="font-medium text-gray-700">{DIMENSION_LABELS[key]}: </span>
-                <span className="text-gray-600">{scores[key].feedback}</span>
+                <span className="font-medium text-slate-700">{DIMENSION_LABELS[key]}: </span>
+                <span className="text-slate-600">{scores[key].feedback}</span>
               </span>
             </li>
           ))}
@@ -42,7 +40,6 @@ export function FeedbackSection({ scores, overallFeedback }: FeedbackSectionProp
         <p className="text-sm text-green-600">✅ 全ての観点で良好です</p>
       )}
 
-      {/* 良好な観点 */}
       {dimensions
         .filter((key) => !scores[key].feedback)
         .map((key) => (

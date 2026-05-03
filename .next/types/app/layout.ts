@@ -1,4 +1,4 @@
-// File: /Users/iwakitoshiyuki/claude-code-book-chapter8/src/app/layout.tsx
+// File: /Users/iwakitoshiyuki/QuestionCoach/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

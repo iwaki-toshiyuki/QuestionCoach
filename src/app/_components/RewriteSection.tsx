@@ -18,16 +18,16 @@ export function RewriteSection({ rewrittenQuestion }: RewriteSectionProps) {
   }
 
   return (
-    <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-      <h3 className="font-semibold text-blue-800">リライト後の質問</h3>
+    <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-5">
+      <h3 className="font-semibold text-indigo-900">リライト後の質問</h3>
       {isHighQuality ? (
-        <p className="mt-2 text-green-700">✅ 十分良い質問です。このままAIに投稿できます。</p>
+        <p className="mt-2 text-sm text-green-700">✅ 十分良い質問です。このままAIに投稿できます。</p>
       ) : (
         <>
-          <p className="mt-2 whitespace-pre-wrap text-sm text-gray-800">{rewrittenQuestion}</p>
+          <p className="mt-3 whitespace-pre-wrap text-sm text-slate-800 leading-relaxed">{rewrittenQuestion}</p>
           <button
             onClick={handleCopy}
-            className="mt-3 rounded-md border border-blue-300 bg-white px-4 py-1.5 text-sm text-blue-700 hover:bg-blue-100"
+            className="mt-4 rounded-md bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-500 transition-colors"
           >
             {copied ? '✅ コピーしました' : 'コピー'}
           </button>
