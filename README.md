@@ -2,6 +2,11 @@
 
 AI駆動の質問力向上支援Webアプリ。入力した質問を多角的にスコアリングし、改善フィードバックとリライト例を即時提供します。
 
+## URL
+```
+https://question-coach-flax.vercel.app/
+```
+
 ## 概要
 
 AIツールの普及により「質問の質」がアウトカムを左右する時代において、誰もが良い質問を作れるよう支援します。
@@ -51,6 +56,9 @@ cp .env.local.example .env.local
 ```
 ANTHROPIC_API_KEY=your_api_key_here
 ```
+
+> **注意**: Anthropic API キーは [Anthropic Console](https://console.anthropic.com/) で取得できます。
+> API の利用は**従量課金制**です。ローカル環境での動作確認でもリクエストごとに料金が発生するため、ご注意ください。
 
 ### 起動
 
