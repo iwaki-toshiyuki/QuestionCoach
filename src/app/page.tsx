@@ -28,6 +28,14 @@ export default function Home() {
     localStorage.setItem(STORAGE_KEY, value);
   }
 
+  function handleReset() {
+    setQuestion('');
+    setState('idle');
+    setResult(null);
+    setErrorMessage('');
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
   async function handleSubmit(q: string) {
     setState('loading');
     setErrorMessage('');
@@ -62,8 +70,10 @@ export default function Home() {
       {/* 左パネル: 入力エリア */}
       <aside className="w-full md:w-1/3 bg-slate-800 md:sticky md:top-0 md:h-screen flex flex-col p-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-white">QuestionCoach</h1>
-          <p className="mt-1 text-sm text-slate-400">質問力を高めるAI評価ツール</p>
+          <button onClick={handleReset} className="text-left">
+            <h1 className="text-2xl font-bold text-white hover:text-slate-300 transition-colors cursor-pointer">QuestionCoach</h1>
+            <p className="mt-1 text-sm text-slate-400">質問力を高めるAI評価ツール</p>
+          </button>
         </div>
 
         <div className="flex-1">
