@@ -25,9 +25,12 @@ export function QuestionInput({ value, onChange, onSubmit, isLoading }: Question
 
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-slate-300">
-        評価したい質問を入力
-      </label>
+      <div>
+        <label className="block text-sm font-medium text-slate-300">
+          評価したい質問を入力してください
+        </label>
+        <p className="mt-1 text-xs text-slate-400">6つの観点で0〜100点をAIがスコアリングします</p>
+      </div>
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}
